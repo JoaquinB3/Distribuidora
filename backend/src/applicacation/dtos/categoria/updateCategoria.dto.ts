@@ -2,7 +2,7 @@ import { postCategoriaValidation } from "../../validations/categoria/postCategor
 
 export class UpdateCategoriaDto {
     private constructor(
-        private nombre: string,
+        public nombre: string,
     ) {}
 
     public static create(categoria: any): [string?, UpdateCategoriaDto?] {

@@ -6,7 +6,7 @@ export class Cliente {
         private contacto: string,
         private razon_social: string,
         private telefono: number,
-        private mail: string
+        private mail: string,
     ) {}
 
     //get
