@@ -6,7 +6,7 @@ import { Proveedor } from "./proveedor.entity";
 export class Compra {
     constructor(
         private idCompra: number,
-        private fechaVenta: Date,
+        private fechaCompra: Date,
         private monto: number,
         private metodoPago: MetodoPago = new MetodoPago(MetodoPagoEnum.Ninguno, ''),
         private factura: Factura,
@@ -18,8 +18,8 @@ export class Compra {
         return this.idCompra;
     }
 
-    public getFechaVenta(): Date {
-        return this.fechaVenta;
+    public getFechaCompra(): Date {
+        return this.fechaCompra;
     }
 
     public getMonto(): number {
@@ -43,8 +43,8 @@ export class Compra {
         this.idCompra = idCompra;
     }
 
-    public setFechaVenta(fechaVenta: Date): void {
-        this.fechaVenta = fechaVenta;
+    public setFechaCompra(fechaCompra: Date): void {
+        this.fechaCompra = fechaCompra;
     }
 
     public setMonto(monto: number): void {
