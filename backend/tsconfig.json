@@ -2,6 +2,8 @@
   "compilerOptions": {
     /* Lenguaje y entorno */
     "target": "ES2020",                        // Usa funciones modernas (async/await, etc.)
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "module": "commonjs",                      // Node.js usa CommonJS
     "moduleResolution": "node",                // Resolución de módulos tipo Node
     "lib": ["ES2020"],                         // Librerías estándar
