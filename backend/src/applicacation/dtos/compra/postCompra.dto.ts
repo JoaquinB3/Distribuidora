@@ -7,9 +7,9 @@ export class PostCompraDto {
     private constructor (
         public fechaCompra: Date,
         public monto: number,
-        public metodoPago: PostMetodoPagoDto,
-        public factura: PostFacturaDto,
-        public proveedor: PostProveedorDto, 
+        public idMetodoPago: number,
+        public idFactura: number,
+        public idProveedor: number, 
     ) {}
 
     public static create(compra: any): [string?, PostCompraDto?] {
@@ -22,9 +22,9 @@ export class PostCompraDto {
         return [undefined, new PostCompraDto(
             compraValidation.data.fechaCompra,
             compraValidation.data.monto,
-            compraValidation.data.metodoPago,
-            compraValidation.data.factura,
-            compraValidation.data.proveedor
+            compraValidation.data.idMetodoPago,
+            compraValidation.data.idFactura,
+            compraValidation.data.idProveedor
         )];
     }
 }

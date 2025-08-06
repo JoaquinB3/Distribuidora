@@ -9,8 +9,8 @@ export class UpdateProductoDto {
         public descripcion: string,
         public precio: number,
         public stock: number,
-        public idMarca: PostMarcaDto,
-        public idCategoria: PostCategoriaDto,
+        public idMarca: number,
+        public idCategoria: number,
     ) {}
 
     public static create(producto: any): [string?, UpdateProductoDto?] {

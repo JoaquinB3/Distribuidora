@@ -53,8 +53,8 @@ export class ClienteService {
     }
 
     public async delete(idCliente: number): Promise<void> {
-        const proveedor = await this.clienteRepository.getCliente(idCliente);
-        if (!proveedor) throw CustomError.notFound('El cliente no fue encontrado');
-        await this.clienteRepository.delete(proveedor.getIdCliente());
+        const cliente = await this.clienteRepository.getCliente(idCliente);
+        if (!cliente) throw CustomError.notFound('El cliente no fue encontrado');
+        await this.clienteRepository.delete(cliente.getIdCliente());
     }
 }

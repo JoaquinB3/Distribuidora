@@ -1,6 +1,4 @@
 import z from "zod";
-import { PostMarcaSchema } from "../marca/postMarca.validation";
-import { PostCategoriaSchema } from "../categoria/postCategoria.validation";
 
 export const PostProductoSchema = z.object({
     codigo: z.number(),
@@ -8,8 +6,8 @@ export const PostProductoSchema = z.object({
     descripcion: z.string(),
     precio: z.number(),
     stock: z.number(),
-    idMarca: PostMarcaSchema,
-    idCategoria: PostCategoriaSchema,
+    idMarca: z.number(),
+    idCategoria: z.number(),
 });
 
 export const postProductoValidation = (venta: any) => {

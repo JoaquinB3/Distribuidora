@@ -1,6 +1,4 @@
 import { postProductoValidation } from "../../validations/producto/postProducto.validation";
-import { PostCategoriaDto } from "../categoria/postCategoria.dto";
-import { PostMarcaDto } from "../marca/postMarca.dto";
 
 export class PostProductoDto {
     private constructor (
@@ -9,8 +7,8 @@ export class PostProductoDto {
         public descripcion: string,
         public precio: number,
         public stock: number,
-        public idMarca: PostMarcaDto,
-        public idCategoria: PostCategoriaDto,
+        public idMarca: number,
+        public idCategoria: number,
     ) {}
 
     public static create(producto: any): [string?, PostProductoDto?] {

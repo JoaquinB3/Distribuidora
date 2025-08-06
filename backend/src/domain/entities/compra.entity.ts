@@ -59,7 +59,7 @@ export class Compra {
         this.factura = factura;
     }
 
-    public setCliente(proveedor: Proveedor): void {
+    public setProveedor(proveedor: Proveedor): void {
         this.proveedor = proveedor;
     }
 }
