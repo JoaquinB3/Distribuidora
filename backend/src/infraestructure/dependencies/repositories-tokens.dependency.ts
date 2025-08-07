@@ -8,4 +8,6 @@ export const REPOSITORIES_TOKENS = {
     IProductoRepository: Symbol.for('IProductoRepository'),
     ICompraRepository: Symbol.for('ICompraRepository'),
     IVentaRepository: Symbol.for('IVentaRepository'),
+    IProductoXCompraRepository: Symbol.for('IProductoXCompraRepository'),
+    IProductoXVentaRepository: Symbol.for('IProductoXVentaRepository'),
 }

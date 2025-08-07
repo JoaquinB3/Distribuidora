@@ -1,12 +1,10 @@
 import { postProductoXVentaValidation } from "../../validations/productoXVenta/postProductoXVenta.validation";
-import { PostProductoDto } from "../producto/postProducto.dto";
-import { PostVentaDto } from "../venta/postVenta.dto";
 
 export class PostProductoXVentaDto {
     private constructor(
         public cantidad: number,
-        public producto: PostProductoDto,
-        public venta: PostVentaDto,
+        public idProducto: number,
+        public idVenta: number,
     ) {}
 
     public static create(productoXVenta: any): [string?, PostProductoXVentaDto?] {
@@ -22,8 +20,8 @@ export class PostProductoXVentaDto {
             undefined,
             new PostProductoXVentaDto(
                 data.cantidad,
-                data.producto,
-                data.venta,
+                data.idProducto,
+                data.idVenta,
             )
         ];
     }
