@@ -5,7 +5,6 @@ export class PostVentaDto {
         public fechaVenta: Date,
         public monto: number,
         public idMetodoPago: number,
-        public idFactura: number,
         public idCliente: number, 
     ) {}
 
@@ -20,7 +19,6 @@ export class PostVentaDto {
             ventaValidation.data.fechaVenta,
             ventaValidation.data.monto,
             ventaValidation.data.idMetodoPago,
-            ventaValidation.data.idFactura,
             ventaValidation.data.idCliente,
         )];
     }

@@ -1,6 +1,4 @@
-import { MetodoPagoEnum } from "../types/metodoPago.enum";
 import { Factura } from "./factura.entity";
-import { MetodoPago } from "./metodoPago.entity";
 import { Proveedor } from "./proveedor.entity";
 
 export class Compra {
@@ -8,9 +6,8 @@ export class Compra {
         private idCompra: number,
         private fechaCompra: Date,
         private monto: number,
-        private metodoPago: MetodoPago = new MetodoPago(MetodoPagoEnum.Ninguno, ''),
-        private factura: Factura,
-        private proveedor: Proveedor,
+        private metodoPago: string,
+        private proveedor: number,
     ) {}
 
     //get
@@ -26,15 +23,11 @@ export class Compra {
         return this.monto;
     }
 
-    public getMetodoPago(): MetodoPago {
+    public getMetodoPago(): string {
         return this.metodoPago;
     }
 
-    public getFactura(): Factura {
-        return this.factura;
-    }
-
-    public getProveedor(): Proveedor {
+    public getProveedor(): number {
         return this.proveedor;
     }
 
@@ -51,15 +44,11 @@ export class Compra {
         this.monto = monto;
     }
 
-    public setMetodoPago(metodoPago: MetodoPago): void {
+    public setMetodoPago(metodoPago: string): void {
         this.metodoPago = metodoPago;
     }
 
-    public setFactura(factura: Factura): void {
-        this.factura = factura;
-    }
-
-    public setProveedor(proveedor: Proveedor): void {
+    public setProveedor(proveedor: number): void {
         this.proveedor = proveedor;
     }
 }

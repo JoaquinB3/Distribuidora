@@ -5,7 +5,7 @@ export const PostProveedorSchema = z.object({
     apellido: z.string(),
     contacto: z.string(),
     razon_social: z.string(),
-    telefono: z.number(),
+    telefono: z.string(),
     mail: z.string(),
 });
 

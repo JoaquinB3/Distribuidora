@@ -8,9 +8,8 @@ export class Venta {
         private idVenta: number,
         private fechaVenta: Date,
         private monto: number,
-        private metodoPago: MetodoPago = new MetodoPago(MetodoPagoEnum.Ninguno, ''),
-        private factura: Factura,
-        private cliente: Cliente,
+        private metodoPago: string,
+        private cliente: number,
     ) {}
 
     //get
@@ -26,15 +25,11 @@ export class Venta {
         return this.monto;
     }
 
-    public getMetodoPago(): MetodoPago {
+    public getMetodoPago(): string{
         return this.metodoPago;
     }
 
-    public getFactura(): Factura {
-        return this.factura;
-    }
-
-    public getCliente(): Cliente {
+    public getCliente(): number {
         return this.cliente;
     }
 
@@ -51,15 +46,11 @@ export class Venta {
         this.monto = monto;
     }
 
-    public setMetodoPago(metodoPago: MetodoPago): void {
+    public setMetodoPago(metodoPago: string): void {
         this.metodoPago = metodoPago;
     }
 
-    public setFactura(factura: Factura): void {
-        this.factura = factura;
-    }
-
-    public setCliente(cliente: Cliente): void {
+    public setCliente(cliente: number): void {
         this.cliente = cliente;
     }
 }

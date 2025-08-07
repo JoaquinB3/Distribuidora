@@ -3,6 +3,8 @@ export class Factura {
         private idFactura: number,
         private fecha: Date,
         private precioFinal: number,
+        private idCompra: number | null,
+        private idVenta: number | null,
     ) {}
 
     //get
@@ -18,6 +20,14 @@ export class Factura {
         return this.precioFinal;
     }
 
+    public getIdCompra(): number | null{
+        return this.idCompra;
+    }
+
+    public getIdVenta(): number | null{
+        return this.idVenta;
+    }
+
     //set
     public setIdFactura(idFactura: number): void {
         this.idFactura = idFactura;
@@ -29,5 +39,13 @@ export class Factura {
 
     public setPrecioFinal(precioFinal: number): void {
         this.precioFinal = precioFinal;
+    }
+
+    public setIdCompra(idCompra: number | null): void{
+        this.idCompra = idCompra;
+    }
+
+    public setIdVenta(idVenta: number | null): void{
+        this.idVenta = idVenta;
     }
 }

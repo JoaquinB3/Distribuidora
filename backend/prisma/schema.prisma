@@ -14,3 +14,109 @@ datasource db {
   // provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Categoria {
+  id        Int       @id @default(autoincrement())
+  nombre    String
+  productos Producto[]
+}
+
+model Cliente {
+  id        Int       @id @default(autoincrement())
+  nombre    String
+  apellido  String
+  contacto String
+  razonSocial String
+  telefono String?
+  email     String
+  ventas    Venta[]
+}
+
+model Compra {
+  id              Int                @id @default(autoincrement())
+  monto           Float
+  fecha           DateTime
+  metodoPago      String
+  proveedorId     Int
+  proveedor       Proveedor          @relation(fields: [proveedorId], references: [id])
+  productosXCompra ProductoXCompra[]
+  factura         Factura?
+}
+
+model Factura {
+  id        Int       @id @default(autoincrement())
+  fecha     DateTime
+  ventaId   Int?   @unique
+  venta     Venta?     @relation(fields: [ventaId], references: [id])
+  compraId Int? @unique
+  compra   Compra? @relation(fields: [compraId], references: [id])
+}
+
+model Marca {
+  id        Int       @id @default(autoincrement())
+  nombre    String
+  productos Producto[]
+}
+
+model MetodoPago {
+  id        Int       @id @default(autoincrement())
+  nombre    String
+}
+
+model Producto {
+  id          Int             @id @default(autoincrement())
+  codigo      Int          @unique
+  nombre      String
+  descripcion String
+  precio      Float
+  stock       Int
+  categoriaId Int
+  categoria   Categoria       @relation(fields: [categoriaId], references: [id])
+  marcaId     Int
+  marca       Marca           @relation(fields: [marcaId], references: [id])
+  productosXCompra ProductoXCompra[]
+  productosXVenta  ProductoXVenta[]
+}
+
+model ProductoXCompra {
+  id         Int      @id @default(autoincrement())
+  productoId Int
+  compraId   Int
+  cantidad   Int
+  producto   Producto @relation(fields: [productoId], references: [id])
+  compra     Compra   @relation(fields: [compraId], references: [id])
+}
+
+model ProductoXVenta {
+  id         Int      @id @default(autoincrement())
+  productoId Int
+  ventaId    Int
+  cantidad   Int
+  producto   Producto @relation(fields: [productoId], references: [id])
+  venta      Venta    @relation(fields: [ventaId], references: [id])
+}
+
+model Proveedor {
+  id          Int       @id @default(autoincrement())
+  nombre      String
+  apellido    String
+  contacto    String
+  razonSocial String
+  telefono    String?
+  email       String
+  compras     Compra[]
+}
+
+model Venta {
+  id            Int             @id @default(autoincrement())
+  monto         Float
+  fecha         DateTime
+  metodoPagoId  String
+  clienteId     Int
+  cliente       Cliente         @relation(fields: [clienteId], references: [id])
+  productosXVenta ProductoXVenta[]
+  factura       Factura?
+}
+
+
+

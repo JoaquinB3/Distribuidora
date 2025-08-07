@@ -5,7 +5,7 @@ export class Cliente {
         private apellido: string,
         private contacto: string,
         private razon_social: string,
-        private telefono: number,
+        private telefono: string,
         private mail: string,
     ) {}
 
@@ -30,7 +30,7 @@ export class Cliente {
         return this.razon_social;
     }
 
-    public getTelefono(): number {
+    public getTelefono(): string {
         return this.telefono;
     }
 
@@ -59,7 +59,7 @@ export class Cliente {
         this.razon_social = razon_social;
     }
 
-    public setTelefono(telefono: number): void {
+    public setTelefono(telefono: string): void {
         this.telefono = telefono;
     }
 

@@ -5,6 +5,8 @@ export class GetFacturaDto {
         public idFactura: number,
         public fecha: Date,
         public precioFinal: number,
+        public idCompra: number | null = null,
+        public idVenta: number | null = null,
     ) {} 
 
     public static create(factura: Factura): GetFacturaDto {
@@ -12,6 +14,8 @@ export class GetFacturaDto {
             factura.getIdFactura(),
             factura.getFecha(),
             factura.getPrecioFinal(),
+            factura.getIdCompra(),
+            factura.getIdVenta(),
         );
     }
 }

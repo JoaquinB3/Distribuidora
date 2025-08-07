@@ -4,6 +4,8 @@ export class PostFacturaDto {
     private constructor(
         public fecha: Date,
         public precioFinal: number,
+        public idCompra: number | null = null,
+        public idVenta: number | null = null,
     ) {}
 
     public static create(factura: any): [string?, PostFacturaDto?] {
@@ -19,7 +21,9 @@ export class PostFacturaDto {
             undefined,
             new PostFacturaDto(
                 data.fecha,
-                data.precioFinal
+                data.precioFinal,
+                data.idCompra,
+                data.idVenta
             )
         ];
     }

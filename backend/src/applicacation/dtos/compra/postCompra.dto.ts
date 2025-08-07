@@ -8,7 +8,6 @@ export class PostCompraDto {
         public fechaCompra: Date,
         public monto: number,
         public idMetodoPago: number,
-        public idFactura: number,
         public idProveedor: number, 
     ) {}
 
@@ -23,7 +22,6 @@ export class PostCompraDto {
             compraValidation.data.fechaCompra,
             compraValidation.data.monto,
             compraValidation.data.idMetodoPago,
-            compraValidation.data.idFactura,
             compraValidation.data.idProveedor
         )];
     }

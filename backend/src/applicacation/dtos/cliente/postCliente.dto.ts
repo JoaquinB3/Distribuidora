@@ -6,7 +6,7 @@ export class PostClienteDto {
         public apellido: string,
         public contacto: string,
         public razon_social: string,
-        public telefono: number,
+        public telefono: string,
         public mail: string,
     ) {}
 
