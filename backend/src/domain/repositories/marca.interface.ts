@@ -5,6 +5,6 @@ export interface IMarcaRepository {
     getAll(): Promise<Marca[]>
     getMarca(idMarca: number): Promise<Marca | null>
     getMarcaPorNombre(nombreMarca: string): Promise<Marca | null>,
-    update(marca: Marca): Promise<void>
+    update(marca: Marca): Promise<number>
     delete(idMarca: number): Promise<void>    
 }

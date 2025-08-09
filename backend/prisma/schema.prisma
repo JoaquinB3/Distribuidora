@@ -5,8 +5,10 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  // provider = "prisma-client-js"
+  provider = "prisma-client"
+  // output   = "../generated/prisma"
+  output   = "../src/infraestructure/prisma/generated"
 }
 
 datasource db {
@@ -22,14 +24,14 @@ model Categoria {
 }
 
 model Cliente {
-  id        Int       @id @default(autoincrement())
-  nombre    String
-  apellido  String
-  contacto String
+  id          Int       @id @default(autoincrement())
+  nombre      String
+  apellido    String
+  contacto    String
   razonSocial String
-  telefono String?
-  email     String
-  ventas    Venta[]
+  telefono    String?
+  email       String
+  ventas      Venta[]
 }
 
 model Compra {

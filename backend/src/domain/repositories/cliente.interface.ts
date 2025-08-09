@@ -5,6 +5,6 @@ export interface IClienteRepository {
     getAll(): Promise<Cliente[]>
     getCliente(idCliente: number): Promise<Cliente | null>
     getClientePorMail(mailCliente: string): Promise<Cliente | null>
-    update(cliente: Cliente): Promise<void>
+    update(cliente: Cliente): Promise<number>
     delete(idCliente: number): Promise<void>    
 }

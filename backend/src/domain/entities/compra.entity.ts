@@ -1,6 +1,3 @@
-import { Factura } from "./factura.entity";
-import { Proveedor } from "./proveedor.entity";
-
 export class Compra {
     constructor(
         private idCompra: number,

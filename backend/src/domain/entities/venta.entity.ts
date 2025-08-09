@@ -1,8 +1,3 @@
-import { MetodoPagoEnum } from "../types/metodoPago.enum";
-import { Cliente } from "./cliente.entity";
-import { Factura } from "./factura.entity";
-import { MetodoPago } from "./metodoPago.entity";
-
 export class Venta {
     constructor(
         private idVenta: number,

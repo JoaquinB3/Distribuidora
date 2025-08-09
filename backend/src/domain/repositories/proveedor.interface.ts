@@ -5,6 +5,6 @@ export interface IProveedorRepository {
     getAll(): Promise<Proveedor[]>
     getProveedor(idProveedor: number): Promise<Proveedor | null>
     getProveedorPorMail(mailProveedor: string): Promise<Proveedor | null>
-    update(proveedor: Proveedor): Promise<void>
+    update(proveedor: Proveedor): Promise<number>
     delete(idProveedor: number): Promise<void>    
 }

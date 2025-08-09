@@ -5,7 +5,7 @@ export class Proveedor {
         private apellido: string,
         private contacto: string,
         private razon_social: string,
-        private telefono: string,
+        private telefono: string | null,
         private mail: string
     ) {}
 
@@ -30,7 +30,7 @@ export class Proveedor {
         return this.razon_social;
     }
 
-    public getTelefono(): string {
+    public getTelefono(): string | null {
         return this.telefono;
     }
 
@@ -59,7 +59,7 @@ export class Proveedor {
         this.razon_social = razon_social;
     }
 
-    public setTelefono(telefono: string): void {
+    public setTelefono(telefono: string | null ): void {
         this.telefono = telefono;
     }
 
