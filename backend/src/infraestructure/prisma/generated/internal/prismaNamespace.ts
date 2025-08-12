@@ -1309,6 +1309,7 @@ export type CompraScalarFieldEnum = (typeof CompraScalarFieldEnum)[keyof typeof 
 export const FacturaScalarFieldEnum = {
   id: 'id',
   fecha: 'fecha',
+  precioFinal: 'precioFinal',
   ventaId: 'ventaId',
   compraId: 'compraId'
 } as const

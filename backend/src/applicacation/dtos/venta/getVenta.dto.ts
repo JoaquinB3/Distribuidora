@@ -8,9 +8,8 @@ export class GetVentaDto {
         public idVenta: number,
         public fechaVenta: Date,
         public monto: number,
-        public metodoPago: MetodoPago,
-        public factura: Factura,
-        public cliente: Cliente,
+        public metodoPago: string,
+        public cliente: number,
     ) {}
 
     public static create(venta: Venta): GetVentaDto {
@@ -19,7 +18,6 @@ export class GetVentaDto {
             venta.getFechaVenta(),
             venta.getMonto(),
             venta.getMetodoPago(),
-            venta.getFactura(),
             venta.getCliente(),
         )
     }

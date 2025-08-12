@@ -5,8 +5,8 @@ export class ProductoXCompra {
     constructor(
         private idProductoXCompra: number,
         private cantidad: number,
-        private producto: Producto,
-        private compra: Compra,
+        private idProducto: number,
+        private idCompra: number,
     ) {}
 
     //get
@@ -18,12 +18,12 @@ export class ProductoXCompra {
         return this.cantidad;
     }
 
-    public getProducto(): Producto {
-        return this.producto;
+    public getIdProducto(): number {
+        return this.idProducto;
     }
 
-    public getCompra(): Compra {
-        return this.compra;
+    public getIdCompra(): number {
+        return this.idCompra;
     }
 
     //set
@@ -35,11 +35,11 @@ export class ProductoXCompra {
         this.cantidad = cantidad;
     }
 
-    public setProducto(producto: Producto): void {
-        this.producto = producto;
+    public setIdProducto(idProducto: number): void {
+        this.idProducto = idProducto;
     }
     
-    public setVenta(compra: Compra): void {
-        this.compra = compra;
+    public setIdVenta(idCompra: number): void {
+        this.idCompra = idCompra;
     }
 }

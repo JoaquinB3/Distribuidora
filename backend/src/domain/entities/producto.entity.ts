@@ -9,8 +9,8 @@ export class Producto {
         private descripcion: string,
         private precio: number,
         private stock: number,
-        private marca: Marca,
-        private categoria: Categoria,
+        private idMarca: number,
+        private idCategoria: number,
     ) {}
 
     //get
@@ -38,12 +38,12 @@ export class Producto {
         return this.stock;
     }
 
-    public getMarca(): Marca {
-        return this.marca;
+    public getIdMarca(): number {
+        return this.idMarca;
     }
 
-    public getCategoria(): Categoria {
-        return this.categoria;
+    public getIdCategoria(): number {
+        return this.idCategoria;
     }
 
     //set
@@ -71,11 +71,11 @@ export class Producto {
         this.stock = stock;
     }
 
-    public setMarca(marca: Marca): void {
-        this.marca = marca;
+    public setIdMarca(idMarca: number): void {
+        this.idMarca = idMarca;
     }
 
-    public setCategoria(categoria: Categoria): void {
-        this.categoria = categoria;
+    public setIdCategoria(idCategoria:  number): void {
+        this.idCategoria = idCategoria;
     }
 }

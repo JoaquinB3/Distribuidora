@@ -27,12 +27,14 @@ export type AggregateFactura = {
 
 export type FacturaAvgAggregateOutputType = {
   id: number | null
+  precioFinal: number | null
   ventaId: number | null
   compraId: number | null
 }
 
 export type FacturaSumAggregateOutputType = {
   id: number | null
+  precioFinal: number | null
   ventaId: number | null
   compraId: number | null
 }
@@ -40,6 +42,7 @@ export type FacturaSumAggregateOutputType = {
 export type FacturaMinAggregateOutputType = {
   id: number | null
   fecha: Date | null
+  precioFinal: number | null
   ventaId: number | null
   compraId: number | null
 }
@@ -47,6 +50,7 @@ export type FacturaMinAggregateOutputType = {
 export type FacturaMaxAggregateOutputType = {
   id: number | null
   fecha: Date | null
+  precioFinal: number | null
   ventaId: number | null
   compraId: number | null
 }
@@ -54,6 +58,7 @@ export type FacturaMaxAggregateOutputType = {
 export type FacturaCountAggregateOutputType = {
   id: number
   fecha: number
+  precioFinal: number
   ventaId: number
   compraId: number
   _all: number
@@ -62,12 +67,14 @@ export type FacturaCountAggregateOutputType = {
 
 export type FacturaAvgAggregateInputType = {
   id?: true
+  precioFinal?: true
   ventaId?: true
   compraId?: true
 }
 
 export type FacturaSumAggregateInputType = {
   id?: true
+  precioFinal?: true
   ventaId?: true
   compraId?: true
 }
@@ -75,6 +82,7 @@ export type FacturaSumAggregateInputType = {
 export type FacturaMinAggregateInputType = {
   id?: true
   fecha?: true
+  precioFinal?: true
   ventaId?: true
   compraId?: true
 }
@@ -82,6 +90,7 @@ export type FacturaMinAggregateInputType = {
 export type FacturaMaxAggregateInputType = {
   id?: true
   fecha?: true
+  precioFinal?: true
   ventaId?: true
   compraId?: true
 }
@@ -89,6 +98,7 @@ export type FacturaMaxAggregateInputType = {
 export type FacturaCountAggregateInputType = {
   id?: true
   fecha?: true
+  precioFinal?: true
   ventaId?: true
   compraId?: true
   _all?: true
@@ -183,6 +193,7 @@ export type FacturaGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 export type FacturaGroupByOutputType = {
   id: number
   fecha: Date
+  precioFinal: number
   ventaId: number | null
   compraId: number | null
   _count: FacturaCountAggregateOutputType | null
@@ -213,6 +224,7 @@ export type FacturaWhereInput = {
   NOT?: Prisma.FacturaWhereInput | Prisma.FacturaWhereInput[]
   id?: Prisma.IntFilter<"Factura"> | number
   fecha?: Prisma.DateTimeFilter<"Factura"> | Date | string
+  precioFinal?: Prisma.FloatFilter<"Factura"> | number
   ventaId?: Prisma.IntNullableFilter<"Factura"> | number | null
   compraId?: Prisma.IntNullableFilter<"Factura"> | number | null
   venta?: Prisma.XOR<Prisma.VentaNullableScalarRelationFilter, Prisma.VentaWhereInput> | null
@@ -222,6 +234,7 @@ export type FacturaWhereInput = {
 export type FacturaOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   fecha?: Prisma.SortOrder
+  precioFinal?: Prisma.SortOrder
   ventaId?: Prisma.SortOrderInput | Prisma.SortOrder
   compraId?: Prisma.SortOrderInput | Prisma.SortOrder
   venta?: Prisma.VentaOrderByWithRelationInput
@@ -236,6 +249,7 @@ export type FacturaWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.FacturaWhereInput[]
   NOT?: Prisma.FacturaWhereInput | Prisma.FacturaWhereInput[]
   fecha?: Prisma.DateTimeFilter<"Factura"> | Date | string
+  precioFinal?: Prisma.FloatFilter<"Factura"> | number
   venta?: Prisma.XOR<Prisma.VentaNullableScalarRelationFilter, Prisma.VentaWhereInput> | null
   compra?: Prisma.XOR<Prisma.CompraNullableScalarRelationFilter, Prisma.CompraWhereInput> | null
 }, "id" | "ventaId" | "compraId">
@@ -243,6 +257,7 @@ export type FacturaWhereUniqueInput = Prisma.AtLeast<{
 export type FacturaOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   fecha?: Prisma.SortOrder
+  precioFinal?: Prisma.SortOrder
   ventaId?: Prisma.SortOrderInput | Prisma.SortOrder
   compraId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.FacturaCountOrderByAggregateInput
@@ -258,12 +273,14 @@ export type FacturaScalarWhereWithAggregatesInput = {
   NOT?: Prisma.FacturaScalarWhereWithAggregatesInput | Prisma.FacturaScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Factura"> | number
   fecha?: Prisma.DateTimeWithAggregatesFilter<"Factura"> | Date | string
+  precioFinal?: Prisma.FloatWithAggregatesFilter<"Factura"> | number
   ventaId?: Prisma.IntNullableWithAggregatesFilter<"Factura"> | number | null
   compraId?: Prisma.IntNullableWithAggregatesFilter<"Factura"> | number | null
 }
 
 export type FacturaCreateInput = {
   fecha: Date | string
+  precioFinal: number
   venta?: Prisma.VentaCreateNestedOneWithoutFacturaInput
   compra?: Prisma.CompraCreateNestedOneWithoutFacturaInput
 }
@@ -271,12 +288,14 @@ export type FacturaCreateInput = {
 export type FacturaUncheckedCreateInput = {
   id?: number
   fecha: Date | string
+  precioFinal: number
   ventaId?: number | null
   compraId?: number | null
 }
 
 export type FacturaUpdateInput = {
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  precioFinal?: Prisma.FloatFieldUpdateOperationsInput | number
   venta?: Prisma.VentaUpdateOneWithoutFacturaNestedInput
   compra?: Prisma.CompraUpdateOneWithoutFacturaNestedInput
 }
@@ -284,6 +303,7 @@ export type FacturaUpdateInput = {
 export type FacturaUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  precioFinal?: Prisma.FloatFieldUpdateOperationsInput | number
   ventaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   compraId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -291,17 +311,20 @@ export type FacturaUncheckedUpdateInput = {
 export type FacturaCreateManyInput = {
   id?: number
   fecha: Date | string
+  precioFinal: number
   ventaId?: number | null
   compraId?: number | null
 }
 
 export type FacturaUpdateManyMutationInput = {
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  precioFinal?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type FacturaUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  precioFinal?: Prisma.FloatFieldUpdateOperationsInput | number
   ventaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   compraId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -314,12 +337,14 @@ export type FacturaNullableScalarRelationFilter = {
 export type FacturaCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   fecha?: Prisma.SortOrder
+  precioFinal?: Prisma.SortOrder
   ventaId?: Prisma.SortOrder
   compraId?: Prisma.SortOrder
 }
 
 export type FacturaAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  precioFinal?: Prisma.SortOrder
   ventaId?: Prisma.SortOrder
   compraId?: Prisma.SortOrder
 }
@@ -327,6 +352,7 @@ export type FacturaAvgOrderByAggregateInput = {
 export type FacturaMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   fecha?: Prisma.SortOrder
+  precioFinal?: Prisma.SortOrder
   ventaId?: Prisma.SortOrder
   compraId?: Prisma.SortOrder
 }
@@ -334,12 +360,14 @@ export type FacturaMaxOrderByAggregateInput = {
 export type FacturaMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   fecha?: Prisma.SortOrder
+  precioFinal?: Prisma.SortOrder
   ventaId?: Prisma.SortOrder
   compraId?: Prisma.SortOrder
 }
 
 export type FacturaSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  precioFinal?: Prisma.SortOrder
   ventaId?: Prisma.SortOrder
   compraId?: Prisma.SortOrder
 }
@@ -418,12 +446,14 @@ export type FacturaUncheckedUpdateOneWithoutVentaNestedInput = {
 
 export type FacturaCreateWithoutCompraInput = {
   fecha: Date | string
+  precioFinal: number
   venta?: Prisma.VentaCreateNestedOneWithoutFacturaInput
 }
 
 export type FacturaUncheckedCreateWithoutCompraInput = {
   id?: number
   fecha: Date | string
+  precioFinal: number
   ventaId?: number | null
 }
 
@@ -445,23 +475,27 @@ export type FacturaUpdateToOneWithWhereWithoutCompraInput = {
 
 export type FacturaUpdateWithoutCompraInput = {
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  precioFinal?: Prisma.FloatFieldUpdateOperationsInput | number
   venta?: Prisma.VentaUpdateOneWithoutFacturaNestedInput
 }
 
 export type FacturaUncheckedUpdateWithoutCompraInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  precioFinal?: Prisma.FloatFieldUpdateOperationsInput | number
   ventaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type FacturaCreateWithoutVentaInput = {
   fecha: Date | string
+  precioFinal: number
   compra?: Prisma.CompraCreateNestedOneWithoutFacturaInput
 }
 
 export type FacturaUncheckedCreateWithoutVentaInput = {
   id?: number
   fecha: Date | string
+  precioFinal: number
   compraId?: number | null
 }
 
@@ -483,12 +517,14 @@ export type FacturaUpdateToOneWithWhereWithoutVentaInput = {
 
 export type FacturaUpdateWithoutVentaInput = {
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  precioFinal?: Prisma.FloatFieldUpdateOperationsInput | number
   compra?: Prisma.CompraUpdateOneWithoutFacturaNestedInput
 }
 
 export type FacturaUncheckedUpdateWithoutVentaInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  precioFinal?: Prisma.FloatFieldUpdateOperationsInput | number
   compraId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
@@ -497,6 +533,7 @@ export type FacturaUncheckedUpdateWithoutVentaInput = {
 export type FacturaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   fecha?: boolean
+  precioFinal?: boolean
   ventaId?: boolean
   compraId?: boolean
   venta?: boolean | Prisma.Factura$ventaArgs<ExtArgs>
@@ -506,6 +543,7 @@ export type FacturaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 export type FacturaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   fecha?: boolean
+  precioFinal?: boolean
   ventaId?: boolean
   compraId?: boolean
   venta?: boolean | Prisma.Factura$ventaArgs<ExtArgs>
@@ -515,6 +553,7 @@ export type FacturaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
 export type FacturaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   fecha?: boolean
+  precioFinal?: boolean
   ventaId?: boolean
   compraId?: boolean
   venta?: boolean | Prisma.Factura$ventaArgs<ExtArgs>
@@ -524,11 +563,12 @@ export type FacturaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
 export type FacturaSelectScalar = {
   id?: boolean
   fecha?: boolean
+  precioFinal?: boolean
   ventaId?: boolean
   compraId?: boolean
 }
 
-export type FacturaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "fecha" | "ventaId" | "compraId", ExtArgs["result"]["factura"]>
+export type FacturaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "fecha" | "precioFinal" | "ventaId" | "compraId", ExtArgs["result"]["factura"]>
 export type FacturaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   venta?: boolean | Prisma.Factura$ventaArgs<ExtArgs>
   compra?: boolean | Prisma.Factura$compraArgs<ExtArgs>
@@ -551,6 +591,7 @@ export type $FacturaPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     fecha: Date
+    precioFinal: number
     ventaId: number | null
     compraId: number | null
   }, ExtArgs["result"]["factura"]>
@@ -980,6 +1021,7 @@ export interface Prisma__FacturaClient<T, Null = never, ExtArgs extends runtime.
 export interface FacturaFieldRefs {
   readonly id: Prisma.FieldRef<"Factura", 'Int'>
   readonly fecha: Prisma.FieldRef<"Factura", 'DateTime'>
+  readonly precioFinal: Prisma.FieldRef<"Factura", 'Float'>
   readonly ventaId: Prisma.FieldRef<"Factura", 'Int'>
   readonly compraId: Prisma.FieldRef<"Factura", 'Int'>
 }

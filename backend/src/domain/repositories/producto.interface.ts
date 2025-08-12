@@ -5,6 +5,6 @@ export interface IProductoRepository {
     getAll(): Promise<Producto[]>
     getProducto(idProducto: number): Promise<Producto | null>
     getProductoXCodigo(codigo: number): Promise<Producto | null>
-    update(producto: Producto): Promise<void>
+    update(producto: Producto): Promise<number>
     delete(idProducto: number): Promise<void>    
 }

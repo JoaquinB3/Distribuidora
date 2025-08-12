@@ -4,9 +4,9 @@ import { Venta } from "./venta.entity";
 export class ProductoXVenta {
     constructor(
         private idProductoXVenta: number,
+        private idProducto: number,
+        private idVenta: number,
         private cantidad: number,
-        private producto: Producto,
-        private venta: Venta,
     ) {}
 
     //get
@@ -18,12 +18,12 @@ export class ProductoXVenta {
         return this.cantidad;
     }
 
-    public getProducto(): Producto {
-        return this.producto;
+    public getIdProducto(): number {
+        return this.idProducto;
     }
 
-    public getVenta(): Venta {
-        return this.venta;
+    public getIdVenta(): number {
+        return this.idVenta;
     }
 
     //set
@@ -35,11 +35,11 @@ export class ProductoXVenta {
         this.cantidad = cantidad;
     }
 
-    public setProducto(producto: Producto): void {
-        this.producto = producto;
+    public setIdProducto(idProducto: number): void {
+        this.idProducto = idProducto;
     }
     
-    public setVenta(venta: Venta): void {
-        this.venta = venta;
+    public setIdVenta(idVenta: number): void {
+        this.idVenta = idVenta;
     }
 }

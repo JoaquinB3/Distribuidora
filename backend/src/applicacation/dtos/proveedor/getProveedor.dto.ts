@@ -7,7 +7,7 @@ export class GetProveedorDto {
         public apellido: string,
         public contacto: string,
         public razon_social: string,
-        public telefono: number,
+        public telefono: string | null,
         public mail: string,
     ) {} 
 

@@ -10,6 +10,11 @@ import { ClienteRepository } from '../repostories/cliente.repository';
 import { ProveedorRepository } from '../repostories/proveedor.repository';
 import { MetodoPagoRepository } from '../repostories/metodoPago.repository';
 import { CompraRepository } from '../repostories/compra.repository';
+import { VentaRepository } from '../repostories/venta.repository';
+import { facturaRepository } from '../repostories/factura.repository';
+import { ProductoRepository } from '../repostories/producto.repository';
+import { ProductoXCompraRepository } from '../repostories/productoXCompra.repository';
+import { ProductoXVentaRepository } from '../repostories/productoXVenta.repository';
 
 container.register(PrismaClient, { useValue: PrismaClient });
 //Repositorios
@@ -19,6 +24,11 @@ container.register(REPOSITORIES_TOKENS.IClienteRepository, { useClass: ClienteRe
 container.register(REPOSITORIES_TOKENS.IProveedorRepository, { useClass: ProveedorRepository });
 container.register(REPOSITORIES_TOKENS.IMetodoPagoRepository, { useClass: MetodoPagoRepository });
 container.register(REPOSITORIES_TOKENS.ICompraRepository, { useClass: CompraRepository });
+container.register(REPOSITORIES_TOKENS.IVentaRepository, { useClass: VentaRepository });
+container.register(REPOSITORIES_TOKENS.IFacturaRepository, { useClass: facturaRepository });
+container.register(REPOSITORIES_TOKENS.IProductoRepository, { useClass: ProductoRepository });
+container.register(REPOSITORIES_TOKENS.IProductoXCompraRepository, { useClass: ProductoXCompraRepository });
+container.register(REPOSITORIES_TOKENS.IProductoXVentaRepository, { useClass: ProductoXVentaRepository });
 
 //Servicios
 container.register(CategoriaService, { useClass: CategoriaService});
@@ -27,6 +37,11 @@ container.register(ClienteRepository, { useClass: ClienteRepository });
 container.register(ProveedorRepository, { useClass: ProveedorRepository});
 container.register(MetodoPagoRepository, { useClass: MetodoPagoRepository });
 container.register(CompraRepository, { useClass: CompraRepository });
+container.register(VentaRepository, { useClass: VentaRepository });
+container.register(facturaRepository, { useClass: facturaRepository });
+container.register(ProductoRepository, { useClass: ProductoRepository });
+container.register(ProductoXCompraRepository, { useClass: ProductoXCompraRepository });
+container.register(ProductoXVentaRepository, { useClass: ProductoXVentaRepository });
 
 //Controladores
 

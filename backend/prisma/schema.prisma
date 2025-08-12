@@ -48,6 +48,7 @@ model Compra {
 model Factura {
   id        Int       @id @default(autoincrement())
   fecha     DateTime
+  precioFinal Float
   ventaId   Int?   @unique
   venta     Venta?     @relation(fields: [ventaId], references: [id])
   compraId Int? @unique

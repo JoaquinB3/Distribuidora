@@ -9,7 +9,7 @@ export class VentaRepository implements IVentaRepository {
   constructor(private readonly prisma: PrismaClient) {}
 
   public async create(venta: Venta): Promise<number> {
-    const compraData = await this.prisma.venta.create({
+    const ventaData = await this.prisma.venta.create({
       data: {
         fechaVenta: venta.getFechaVenta(),
         monto: venta.getMonto(),
@@ -17,7 +17,7 @@ export class VentaRepository implements IVentaRepository {
         cliente: venta.getCliente(),
       },
     });
-    return Number(compraData.idCompra);
+    return Number(ventaData.idVenta);
   }
 
   public async getVenta(idVenta: number): Promise<Venta | null> {

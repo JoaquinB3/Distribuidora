@@ -8,9 +8,8 @@ export class GetCompraDto {
         public idCompra: number,
         public fechaCompra: Date,
         public monto: number,
-        public metodoPago: MetodoPago,
-        public factura: Factura,
-        public proveedor: Proveedor,
+        public metodoPago: string,
+        public proveedor: number,
     ) {}
 
     public static create(compra: Compra): GetCompraDto {
@@ -19,7 +18,6 @@ export class GetCompraDto {
             compra.getFechaCompra(),
             compra.getMonto(),
             compra.getMetodoPago(),
-            compra.getFactura(),
             compra.getProveedor(),
         )
     }

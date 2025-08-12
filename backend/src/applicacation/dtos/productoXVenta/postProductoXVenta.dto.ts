@@ -2,9 +2,9 @@ import { postProductoXVentaValidation } from "../../validations/productoXVenta/p
 
 export class PostProductoXVentaDto {
     private constructor(
-        public cantidad: number,
         public idProducto: number,
         public idVenta: number,
+        public cantidad: number,
     ) {}
 
     public static create(productoXVenta: any): [string?, PostProductoXVentaDto?] {
@@ -19,9 +19,9 @@ export class PostProductoXVentaDto {
         return [
             undefined,
             new PostProductoXVentaDto(
-                data.cantidad,
                 data.idProducto,
                 data.idVenta,
+                data.cantidad,
             )
         ];
     }

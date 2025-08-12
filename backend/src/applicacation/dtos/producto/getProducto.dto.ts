@@ -10,8 +10,8 @@ export class GetProductoDto {
         public descripcion: string,
         public precio: number,
         public stock: number,
-        public idMarca: Marca,
-        public idCategoria: Categoria,
+        public idMarca: number,
+        public idCategoria: number,
     ) {}
 
     public static create(producto: Producto): GetProductoDto {
