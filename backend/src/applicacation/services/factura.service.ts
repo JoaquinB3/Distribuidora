@@ -6,7 +6,7 @@ import { PostFacturaDto } from "../dtos/factura/postFactura.dto";
 import { CustomError } from "../errors/custom.errors";
 
 @Injectable()
-export class MarcaService {
+export class FacturaService {
     constructor (
         @Inject(REPOSITORIES_TOKENS.IFacturaRepository) private readonly facturaRepository: IFacturaRepository
     ) {}
@@ -29,6 +29,8 @@ export class MarcaService {
             0,
             factura.fecha,
             factura.precioFinal,
+            factura.idCompra,
+            factura.idVenta,
         );
 
         await this.facturaRepository.create(newFactura)

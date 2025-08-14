@@ -1,8 +1,8 @@
-import { PrismaClient } from "@prisma/client";
 import { Injectable } from "../dependencies/injectable.dependency";
 import { IProductoRepository } from "../../domain/repositories/producto.interface";
 import { Producto } from "../../domain/entities/producto.entity";
 import { ProductoPrismaMapper } from "../mappers/producto-prisma.mapper";
+import { PrismaClient } from "../prisma/generated/client";
 
 @Injectable()
 export class ProductoRepository implements IProductoRepository {
@@ -20,7 +20,7 @@ export class ProductoRepository implements IProductoRepository {
         marcaId: producto.getIdMarca(),
       },
     });
-    return Number(productoData.idProducto);
+    return Number(productoData.id);
   }
 
   public async getProducto(idProducto: number): Promise<Producto | null> {
@@ -32,14 +32,14 @@ export class ProductoRepository implements IProductoRepository {
   }
 
   public async getAll(): Promise<Producto[]> {
-    const productosPrisma = this.prisma.producto.findMany();
+    const productosPrisma = await this.prisma.producto.findMany();
     return ProductoPrismaMapper.fromPrismaArrayToEntity(productosPrisma);
   }
 
   public async getProductoXCodigo(
     codigoProducto: number
   ): Promise<Producto | null> {
-    const productoPrisma = this.prisma.producto.findUnique({
+    const productoPrisma = await this.prisma.producto.findUnique({
       where: { codigo: codigoProducto },
     });
     if (!productoPrisma) return null;
@@ -59,7 +59,7 @@ export class ProductoRepository implements IProductoRepository {
         marcaId: producto.getIdMarca(),
       },
     });
-    return Number(productoUpdatePrisma.idProducto);
+    return Number(productoUpdatePrisma.id);
   }
 
   public async delete(idProducto: number): Promise<void> {

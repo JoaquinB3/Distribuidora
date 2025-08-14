@@ -18,7 +18,7 @@ export class ProductoXVentaService {
     ) {}
     
     public async getProductoXVenta(idProductoXVenta: number): Promise<ProductoXVenta | null> {
-        const productoXVenta = await  this.productoXVentaRepository.getProdctoXVenta(idProductoXVenta);
+        const productoXVenta = await  this.productoXVentaRepository.getProductoXVenta(idProductoXVenta);
 
         if (!productoXVenta) throw CustomError.notFound('No se encontro un productoXVenta con ese id');
         return productoXVenta;
@@ -40,8 +40,8 @@ export class ProductoXVentaService {
         const newProductoXVenta = new ProductoXVenta(
             0,
             productosXVenta.cantidad,
-            producto,
-            venta,
+            producto.getIdProducto(),
+            venta.getIdVenta(),
         );
 
         await this.productoXVentaRepository.create(newProductoXVenta)
@@ -49,7 +49,7 @@ export class ProductoXVentaService {
     }
 
     public async delete(idProductoXVenta: number): Promise<void> {
-        const productoXVenta = await this.productoXVentaRepository.getProdctoXVenta(idProductoXVenta);
+        const productoXVenta = await this.productoXVentaRepository.getProductoXVenta(idProductoXVenta);
         if (!productoXVenta) throw CustomError.notFound('El productoXVenta no fue encontrada');
         await this.productoXVentaRepository.delete(productoXVenta.getIdProductoXVenta());
     } 

@@ -1,25 +1,22 @@
 {
   "compilerOptions": {
-    /* Lenguaje y entorno */
-    "target": "ES2020",                        // Usa funciones modernas (async/await, etc.)
+    "target": "ES2020",                        
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "module": "commonjs",                      // Node.js usa CommonJS
-    "moduleResolution": "node",                // Resolución de módulos tipo Node
-    "lib": ["ES2020"],                         // Librerías estándar
-    "esModuleInterop": true,                   // Permite importar módulos CommonJS como si fueran ESModules
-    "resolveJsonModule": true,                 // Permite importar archivos .json
-    "strict": true,                            // Activa todas las comprobaciones estrictas
-    "forceConsistentCasingInFileNames": true,  // Fuerza consistencia en nombres de archivos
-    "skipLibCheck": true,                      // Omite revisión de tipos de dependencias (mejora tiempos de build)
+    "module": "commonjs",                      
+    "moduleResolution": "node",                
+    "lib": ["ES2020"],                         
+    "esModuleInterop": true,                   
+    "resolveJsonModule": true,                 
+    "strict": true,                            
+    "forceConsistentCasingInFileNames": true,  
+    "skipLibCheck": true,                      
 
-    /* Entrada / salida */
-    "rootDir": "src",                          // Carpeta de entrada (tu código TypeScript)
-    "outDir": "dist",                          // Carpeta de salida (código compilado)
+    "rootDir": "src",                          
+    "outDir": "dist",                          
 
-    /* Optimizaciones */
-    "allowSyntheticDefaultImports": true,      // Permite importar default de módulos que no lo tienen
-    "noEmitOnError": true                      // No emite si hay errores
+    "allowSyntheticDefaultImports": true,      
+    "noEmitOnError": true                      
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]

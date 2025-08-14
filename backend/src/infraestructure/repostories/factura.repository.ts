@@ -1,23 +1,33 @@
-import { PrismaClient } from "@prisma/client";
 import { Injectable } from "../dependencies/injectable.dependency";
 import { IFacturaRepository } from "../../domain/repositories/factura.interface";
 import { Factura } from "../../domain/entities/factura.entity";
 import { FacturaPrismaMapper } from "../mappers/factura-prisma.mapper";
+import { PrismaClient } from "../prisma/generated/client";
 
 @Injectable()
 export class facturaRepository implements IFacturaRepository {
   constructor(private readonly prisma: PrismaClient) {}
 
   public async create(factura: Factura): Promise<number> {
-    const facturaData = await this.prisma.factura.create({
-      data: {
-        fecha: factura.getFecha(),
-        prrecioFinal: factura.getPrecioFinal(),
-        idCompra: factura.getIdCompra(),
-        idVenta: factura.getIdVenta(),
-      },
-    });
-    return Number(facturaData.idCompra);
+    const data: any = {
+      fecha: factura.getFecha(),
+      precioFinal: factura.getPrecioFinal(),
+    };
+
+    if (factura.getIdCompra() !== null) {
+      data.compra = {
+        connect: { id: factura.getIdCompra() },
+      };
+    }
+
+    if (factura.getIdVenta() !== null) {
+      data.venta = {
+        connect: { id: factura.getIdVenta() },
+      };
+    }
+
+    const facturaData = await this.prisma.factura.create({ data });
+    return Number(facturaData.id);
   }
 
   public async getFactura(idFactura: number): Promise<Factura | null> {
@@ -29,7 +39,7 @@ export class facturaRepository implements IFacturaRepository {
   }
 
   public async getAll(): Promise<Factura[]> {
-    const facturasPrisma = this.prisma.factura.findMany();
+    const facturasPrisma = await this.prisma.factura.findMany();
     return FacturaPrismaMapper.fromPrismaArrayToEntity(facturasPrisma);
   }
 

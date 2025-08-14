@@ -1,7 +1,4 @@
 import { postCompraValidation } from "../../validations/compra/postCompra.validation";
-import { PostFacturaDto } from "../factura/postFactura.dto";
-import { PostMetodoPagoDto } from "../metodoPago/postMetodoPago.dto";
-import { PostProveedorDto } from "../proveedor/postProveedor.dto";
 
 export class PostCompraDto {
     private constructor (

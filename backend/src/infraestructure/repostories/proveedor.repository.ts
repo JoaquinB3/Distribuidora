@@ -1,8 +1,8 @@
-import { PrismaClient } from "@prisma/client";
 import { Injectable } from "../dependencies/injectable.dependency";
 import { IProveedorRepository } from "../../domain/repositories/proveedor.interface";
 import { Proveedor } from "../../domain/entities/proveedor.entity";
 import { ProveedorPrismaMapper } from "../mappers/proveedor-prisma.mapper";
+import { PrismaClient } from "../prisma/generated/client";
 
 @Injectable()
 export class ProveedorRepository implements IProveedorRepository     {
@@ -14,12 +14,12 @@ export class ProveedorRepository implements IProveedorRepository     {
         nombre: proveedor.getNombre(),
         apellido: proveedor.getApellido(),
         contacto: proveedor.getContacto(),
-        razon_social: proveedor.getRazonSocial(),
+        razonSocial: proveedor.getRazonSocial(),
         telefono: proveedor.getTelefono(),
-        mail: proveedor.getMail(),
+        email: proveedor.getMail(),
       },
     });
-    return Number(proveedorData.idProveedor);
+    return Number(proveedorData.id);
   }
 
   public async getProveedor(idProveedor: number): Promise<Proveedor | null> {
@@ -31,15 +31,15 @@ export class ProveedorRepository implements IProveedorRepository     {
   }
 
   public async getAll(): Promise<Proveedor[]> {
-    const proveedoresPrisma = this.prisma.proveedor.findMany();
+    const proveedoresPrisma = await this.prisma.proveedor.findMany();
     return ProveedorPrismaMapper.fromPrismaArrayToEntity(proveedoresPrisma);
   }
 
   public async getProveedorPorMail(
     mailProveedor: string
   ): Promise<Proveedor | null> {
-    const proveedorPrisma = this.prisma.proveedor.findUnique({
-      where: { mail: mailProveedor },
+    const proveedorPrisma = await this.prisma.proveedor.findFirst({
+      where: { email: mailProveedor },
     });
     if (!proveedorPrisma) return null;
     return ProveedorPrismaMapper.fromPrismaToEntity(proveedorPrisma);
@@ -52,12 +52,12 @@ export class ProveedorRepository implements IProveedorRepository     {
         nombre: proveedor.getNombre(),
         apellido: proveedor.getApellido(),
         contacto: proveedor.getContacto(),
-        razon_social: proveedor.getRazonSocial(),
+        razonSocial: proveedor.getRazonSocial(),
         telefono: proveedor.getTelefono(),
-        mail: proveedor.getMail(),
+        email: proveedor.getMail(),
       },
     });
-    return Number(proveedorUpdatePrisma.idProveedor);
+    return Number(proveedorUpdatePrisma.id);
   }
 
   public async delete(idProveedor: number): Promise<void> {

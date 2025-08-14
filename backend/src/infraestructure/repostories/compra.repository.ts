@@ -1,8 +1,8 @@
-import { PrismaClient } from "@prisma/client";
 import { Injectable } from "../dependencies/injectable.dependency";
 import { ICompraRepository } from "../../domain/repositories/compra.interface";
 import { Compra } from "../../domain/entities/compra.entity";
 import { CompraPrismaMapper } from "../mappers/compra-prisma.mapper";
+import { PrismaClient } from "../prisma/generated/client";
 
 @Injectable()
 export class CompraRepository implements ICompraRepository {
@@ -11,13 +11,15 @@ export class CompraRepository implements ICompraRepository {
   public async create(compra: Compra): Promise<number> {
     const compraData = await this.prisma.compra.create({
       data: {
-        fechaCompra: compra.getFechaCompra(),
+        fecha: compra.getFechaCompra(),
         monto: compra.getMonto(),
         metodoPago: compra.getMetodoPago(),
-        proveedor: compra.getProveedor(),
+        proveedor: {
+          connect: { id: compra.getIdProveedor() },
+        },
       },
     });
-    return Number(compraData.idCompra);
+    return Number(compraData.id);
   }
 
   public async getCompra(idCompra: number): Promise<Compra | null> {
@@ -29,7 +31,7 @@ export class CompraRepository implements ICompraRepository {
   }
 
   public async getAll(): Promise<Compra[]> {
-    const comprasPrisma = this.prisma.compra.findMany();
+    const comprasPrisma = await this.prisma.compra.findMany();
     return CompraPrismaMapper.fromPrismaArrayToEntity(comprasPrisma);
   }
 

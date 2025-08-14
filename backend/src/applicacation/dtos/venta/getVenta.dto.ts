@@ -18,7 +18,7 @@ export class GetVentaDto {
             venta.getFechaVenta(),
             venta.getMonto(),
             venta.getMetodoPago(),
-            venta.getCliente(),
+            venta.getIdCliente(),
         )
     }
 }

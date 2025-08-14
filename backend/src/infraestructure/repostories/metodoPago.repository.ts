@@ -1,8 +1,8 @@
-import { PrismaClient } from "@prisma/client";
 import { Injectable } from "../dependencies/injectable.dependency";
 import { IMetodoPagoRepository } from "../../domain/repositories/metodoPago.interface";
 import { MetodoPago } from "../../domain/entities/metodoPago.entity";
 import { MetodoPagoPrismaMapper } from "../mappers/metetdoPago-prisma.mapper";
+import { PrismaClient } from "../prisma/generated/client";
 
 @Injectable()
 export class MetodoPagoRepository implements IMetodoPagoRepository {
@@ -14,7 +14,7 @@ export class MetodoPagoRepository implements IMetodoPagoRepository {
         nombre: metodoPago.getNombre(),
       },
     });
-    return Number(metodoPagoData.idMetodoPago);
+    return Number(metodoPagoData.id);
   }
 
   public async getMetodoPago(idMetodoPago: number): Promise<MetodoPago | null> {
@@ -26,7 +26,7 @@ export class MetodoPagoRepository implements IMetodoPagoRepository {
   }
 
   public async getAll(): Promise<MetodoPago[]> {
-    const metodoPagosPrisma = this.prisma.metodoPago.findMany();
+    const metodoPagosPrisma = await this.prisma.metodoPago.findMany();
     return MetodoPagoPrismaMapper.fromPrismaArrayToEntity(metodoPagosPrisma);
   }
 

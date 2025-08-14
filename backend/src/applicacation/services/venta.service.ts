@@ -33,20 +33,17 @@ export class VentaService {
     public async create(venta: PostVentaDto): Promise<number> {
 
         const metodoPago = await this.metodoPagoRepository.getMetodoPago(venta.idMetodoPago);
-        const factura = await this.facturaRepository.getFactura(venta.idFactura);
         const cliente = await this.clienteRepository.getCliente(venta.idCliente);
 
         if (!metodoPago) throw CustomError.notFound('El metodo de pago no existe');
-        if (!factura) throw CustomError.notFound('La factura no existe');
         if (!cliente) throw CustomError.notFound('El cliente no existe');
 
         const newVenta = new Venta(
             0,
             venta.fechaVenta,
             venta.monto,
-            metodoPago,
-            factura,
-            cliente,
+            metodoPago.getNombre(),
+            cliente.getIdCliente(),
         );
 
         await this.ventaRepository.create(newVenta)

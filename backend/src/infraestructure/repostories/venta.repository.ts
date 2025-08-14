@@ -1,8 +1,8 @@
-import { PrismaClient } from "@prisma/client";
 import { Injectable } from "../dependencies/injectable.dependency";
 import { Venta } from "../../domain/entities/venta.entity";
 import { IVentaRepository } from "../../domain/repositories/venta.interface";
 import { VentaPrismaMapper } from "../mappers/venta-prisma.mapper";
+import { PrismaClient } from "../prisma/generated/client";
 
 @Injectable()
 export class VentaRepository implements IVentaRepository {
@@ -11,13 +11,15 @@ export class VentaRepository implements IVentaRepository {
   public async create(venta: Venta): Promise<number> {
     const ventaData = await this.prisma.venta.create({
       data: {
-        fechaVenta: venta.getFechaVenta(),
+        fecha: venta.getFechaVenta(),
         monto: venta.getMonto(),
-        metodoPago: venta.getMetodoPago(),
-        cliente: venta.getCliente(),
+        metodoPagoId: venta.getMetodoPago(),
+        cliente: {
+          connect: { id: venta.getIdCliente() },
+        },
       },
     });
-    return Number(ventaData.idVenta);
+    return Number(ventaData.id);
   }
 
   public async getVenta(idVenta: number): Promise<Venta | null> {
@@ -29,7 +31,7 @@ export class VentaRepository implements IVentaRepository {
   }
 
   public async getAll(): Promise<Venta[]> {
-    const ventasPrisma = this.prisma.venta.findMany();
+    const ventasPrisma = await this.prisma.venta.findMany();
     return VentaPrismaMapper.fromPrismaArrayToEntity(ventasPrisma);
   }
 

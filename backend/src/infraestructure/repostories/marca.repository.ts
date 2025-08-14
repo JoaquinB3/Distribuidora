@@ -1,8 +1,8 @@
-import { PrismaClient } from "@prisma/client";
 import { Injectable } from "../dependencies/injectable.dependency";
 import { IMarcaRepository } from "../../domain/repositories/marca.interface";
 import { Marca } from "../../domain/entities/marca.entity";
 import { MarcaPrismaMapper } from "../mappers/marca-prisma.mapper";
+import { PrismaClient } from "../prisma/generated/client";
 
 @Injectable()
 export class MarcaRepository implements IMarcaRepository {
@@ -26,14 +26,14 @@ export class MarcaRepository implements IMarcaRepository {
   }
 
   public async getAll(): Promise<Marca[]> {
-    const marcasPrisma = this.prisma.marca.findMany();
+    const marcasPrisma = await this.prisma.marca.findMany();
     return MarcaPrismaMapper.fromPrismaArrayToEntity(marcasPrisma);
   }
 
   public async getMarcaPorNombre(
     nombreMarca: string
   ): Promise<Marca | null> {
-    const marcaPrisma = this.prisma.marca.findUnique({
+    const marcaPrisma = await this.prisma.marca.findFirst({
       where: { nombre: nombreMarca },
     });
     if (!marcaPrisma) return null;

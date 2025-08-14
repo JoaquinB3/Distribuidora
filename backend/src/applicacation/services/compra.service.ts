@@ -33,20 +33,17 @@ export class CompraService {
     public async create(compra: PostCompraDto): Promise<number> {
 
         const metodoPago = await this.metodoPagoRepository.getMetodoPago(compra.idMetodoPago);
-        const factura = await this.facturaRepository.getFactura(compra.idFactura);
         const proveedor = await this.proveedorRepository.getProveedor(compra.idProveedor);
 
         if (!metodoPago) throw CustomError.notFound('El metodo de pago no existe');
-        if (!factura) throw CustomError.notFound('La factura no existe');
         if (!proveedor) throw CustomError.notFound('El proveedor no existe');
 
         const newCompra = new Compra(
             0,
             compra.fechaCompra,
             compra.monto,
-            metodoPago,
-            factura,
-            proveedor,
+            metodoPago.getNombre(),
+            proveedor.getIdProveedor(),
         );
 
         await this.compraRepository.create(newCompra)

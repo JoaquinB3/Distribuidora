@@ -1,7 +1,4 @@
 import { Compra } from "../../../domain/entities/compra.entity";
-import { Factura } from "../../../domain/entities/factura.entity";
-import { MetodoPago } from "../../../domain/entities/metodoPago.entity";
-import { Proveedor } from "../../../domain/entities/proveedor.entity";
 
 export class GetCompraDto {
     private constructor(
@@ -18,7 +15,7 @@ export class GetCompraDto {
             compra.getFechaCompra(),
             compra.getMonto(),
             compra.getMetodoPago(),
-            compra.getProveedor(),
+            compra.getIdProveedor(),
         )
     }
 }

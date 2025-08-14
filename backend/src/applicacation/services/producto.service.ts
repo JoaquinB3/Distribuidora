@@ -43,8 +43,8 @@ export class ProductoService {
             producto.descripcion,
             producto.precio,
             producto.stock,
-            marca,
-            categoria,
+            marca.getIdMarca(),
+            categoria.getIdCategoria(),
         );
 
         await this.productoRepository.create(newProducto)
@@ -66,8 +66,8 @@ export class ProductoService {
         productoExistente.setDescripcion(producto.descripcion);
         productoExistente.setPrecio(producto.precio);
         productoExistente.setStock(producto.stock);
-        productoExistente.setMarca(marca);
-        productoExistente.setCategoria(categoria);
+        productoExistente.setIdMarca(marca.getIdMarca());
+        productoExistente.setIdCategoria(categoria.getIdCategoria());
     }
 
     public async delete(idProducto: number): Promise<void> {

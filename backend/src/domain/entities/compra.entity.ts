@@ -4,7 +4,7 @@ export class Compra {
         private fechaCompra: Date,
         private monto: number,
         private metodoPago: string,
-        private proveedor: number,
+        private idProveedor: number,
     ) {}
 
     //get
@@ -24,8 +24,8 @@ export class Compra {
         return this.metodoPago;
     }
 
-    public getProveedor(): number {
-        return this.proveedor;
+    public getIdProveedor(): number {
+        return this.idProveedor;
     }
 
     //set
@@ -45,7 +45,7 @@ export class Compra {
         this.metodoPago = metodoPago;
     }
 
-    public setProveedor(proveedor: number): void {
-        this.proveedor = proveedor;
+    public setIdProveedor(idProveedor: number): void {
+        this.idProveedor = idProveedor;
     }
 }

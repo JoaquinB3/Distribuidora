@@ -4,7 +4,7 @@ export class Venta {
         private fechaVenta: Date,
         private monto: number,
         private metodoPago: string,
-        private cliente: number,
+        private idCliente: number,
     ) {}
 
     //get
@@ -24,8 +24,8 @@ export class Venta {
         return this.metodoPago;
     }
 
-    public getCliente(): number {
-        return this.cliente;
+    public getIdCliente(): number {
+        return this.idCliente;
     }
 
     //set
@@ -45,7 +45,7 @@ export class Venta {
         this.metodoPago = metodoPago;
     }
 
-    public setCliente(cliente: number): void {
-        this.cliente = cliente;
+    public setIdCliente(idCliente: number): void {
+        this.idCliente = idCliente;
     }
 }

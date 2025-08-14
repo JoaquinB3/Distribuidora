@@ -38,8 +38,8 @@ export class ProductoXCompraService {
         const newProductoXCompra = new ProductoXCompra(
             0,
             productosXCompra.cantidad,
-            producto,
-            compra,
+            producto.getIdProducto(),
+            compra.getIdCompra(),
         );
 
         await this.productoXCompraRepository.create(newProductoXCompra)

@@ -1,8 +1,8 @@
-import { PrismaClient } from "@prisma/client";
 import { Injectable } from "../dependencies/injectable.dependency";
 import { IProductoXCompraRepository } from "../../domain/repositories/productoXCompra.interface";
 import { ProductoXCompra } from "../../domain/entities/productoXCompra.entity";
 import { ProductoXCompraPrismaMapper } from "../mappers/productoXCompra-prisma.mapper";
+import { PrismaClient } from "../prisma/generated/client";
 
 @Injectable()
 export class ProductoXCompraRepository implements IProductoXCompraRepository {
@@ -28,7 +28,7 @@ export class ProductoXCompraRepository implements IProductoXCompraRepository {
   }
 
   public async getAll(): Promise<ProductoXCompra[]> {
-    const productosXCompraPrisma = this.prisma.productoXCompra.findMany();
+    const productosXCompraPrisma = await this.prisma.productoXCompra.findMany();
     return ProductoXCompraPrismaMapper.fromPrismaArrayToEntity(productosXCompraPrisma);
   }
 
