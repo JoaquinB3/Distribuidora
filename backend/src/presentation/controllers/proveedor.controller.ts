@@ -62,12 +62,13 @@ export class ProveedorController {
 
     update = async (req: Request, res: Response) => {
         const updatedProveedor = req.body;
+        const idProveedor = req.params.idProveedor;
         if (!updatedProveedor) {
             res.status(400).json({ message: 'Request body is empty' });
             return;
         }
 
-        const [error, updateProveedorDto] = UpdateProveedorDto.create(updatedProveedor);
+        const [error, updateProveedorDto] = UpdateProveedorDto.create(updatedProveedor, Number(idProveedor));
         if (error) {
             res.status(400).json({ message: error });
             return;
@@ -75,8 +76,8 @@ export class ProveedorController {
         
         if (updateProveedorDto) {
             try {
-                const idCliente = await this.proveedorService.update(updateProveedorDto);
-                res.status(201).json({ idCliente });
+                const idProveedorUpdate = await this.proveedorService.update(updateProveedorDto, Number(idProveedor));
+                res.status(201).json({ idProveedorUpdate });
             } catch (error) {
                 HandleError.throw(error, res);
             }

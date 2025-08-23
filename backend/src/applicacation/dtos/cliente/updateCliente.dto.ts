@@ -1,17 +1,18 @@
-import { postClienteValidation } from "../../validations/cliente/postCliente.validation";
+import { putClienteValidation } from "../../validations/cliente/postCliente.validation";
 
 export class UpdateClienteDto {
     private constructor(
-        public nombre: string,
-        public apellido: string,
-        public contacto: string,
-        public razon_social: string,
-        public telefono: string,
-        public mail: string,
+        public id?: number,
+        public nombre?: string,
+        public apellido?: string,
+        public contacto?: string,
+        public razon_social?: string,
+        public telefono?: string,
+        public mail?: string,
     ) {}
 
-    public static create(cliente: any): [string?, UpdateClienteDto?] {
-        const clienteValidation = postClienteValidation(cliente);
+    public static create(cliente: any, id: number): [string?, UpdateClienteDto?] {
+        const clienteValidation = putClienteValidation(cliente);
 
         if (!clienteValidation.success) {
             return [JSON.stringify(clienteValidation.error.message)];
@@ -22,6 +23,7 @@ export class UpdateClienteDto {
         return [
             undefined,
             new UpdateClienteDto(
+                id,
                 data.nombre,
                 data.apellido,
                 data.contacto,

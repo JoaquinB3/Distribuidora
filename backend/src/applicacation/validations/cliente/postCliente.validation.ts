@@ -12,3 +12,8 @@ export const PostClienteSchema = z.object({
 export const postClienteValidation = (cliente: any) => {
     return PostClienteSchema.safeParse(cliente);
 };
+
+export const PutClienteSchema = PostClienteSchema.partial();
+export const putClienteValidation = (cliente: any) => {
+    return PutClienteSchema.safeParse(cliente);
+};

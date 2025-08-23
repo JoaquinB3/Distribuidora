@@ -31,15 +31,17 @@ export class MarcaService {
             marca.nombre,
         );
 
-        await this.marcaRepository.create(newMarca)
-        return newMarca.getIdMarca();
+        const newDbMarcaId = await this.marcaRepository.create(newMarca)
+        return newDbMarcaId;
     }
     
-    public async update(marca: UpdateCategoriaDto): Promise<void> {
-        const marcaExistente = await this.marcaRepository.getMarcaPorNombre(marca.nombre);
+    public async update(marca: UpdateCategoriaDto, idMarca: number): Promise<number> {
+        const marcaExistente = await this.marcaRepository.getMarca(idMarca);
         if (!marcaExistente) throw CustomError.notFound('No se encontro la marca');
 
         marcaExistente.setNombre(marca.nombre);
+        const updatedMarcaId = await this.marcaRepository.update(marcaExistente);
+        return updatedMarcaId;
     }
 
     public async delete(idMarca: number): Promise<void> {

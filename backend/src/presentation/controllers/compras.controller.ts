@@ -12,8 +12,11 @@ export class CompraController {
     ) {}
 
     create = async (req: Request, res: Response) => {
-        const newCompra = req.body;
-        if (!newCompra) {
+        const { newCompra, productos } = req.body;
+        console.log(newCompra, productos);
+        
+
+        if (!newCompra || !productos) {
             res.status(400).json({ message: 'Request body is empty' });
             return;
         }
@@ -26,7 +29,7 @@ export class CompraController {
         
         if (postCompraDto) {
             try {
-                const idCompra = await this.compraService.create(postCompraDto);
+                const idCompra = await this.compraService.create(postCompraDto, productos);
                 res.status(201).json({ idCompra });
             } catch (error) {
                 HandleError.throw(error, res);

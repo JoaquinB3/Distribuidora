@@ -5,8 +5,10 @@ import { IMetodoPagoRepository } from "../../domain/repositories/metodoPago.inte
 import { IVentaRepository } from "../../domain/repositories/venta.interface";
 import { Inject, Injectable } from "../../infraestructure/dependencies/injectable.dependency";
 import { REPOSITORIES_TOKENS } from "../../infraestructure/dependencies/repositories-tokens.dependency";
+import { PostFacturaDto } from "../dtos/factura/postFactura.dto";
 import { PostVentaDto } from "../dtos/venta/postVenta.dto";
 import { CustomError } from "../errors/custom.errors";
+import { FacturaService } from "./factura.service";
 
 @Injectable()
 export class VentaService {
@@ -15,6 +17,7 @@ export class VentaService {
         @Inject(REPOSITORIES_TOKENS.IMetodoPagoRepository) private readonly metodoPagoRepository: IMetodoPagoRepository,
         @Inject(REPOSITORIES_TOKENS.IFacturaRepository) private readonly facturaRepository: IFacturaRepository,
         @Inject(REPOSITORIES_TOKENS.IClienteRepository) private readonly clienteRepository: IClienteRepository,
+        private readonly facturaService: FacturaService,
     ) {}
 
     public async getVenta(idVenta: number): Promise<Venta | null> {
@@ -46,8 +49,23 @@ export class VentaService {
             cliente.getIdCliente(),
         );
 
-        await this.ventaRepository.create(newVenta)
-        return newVenta.getIdVenta();
+        const newDbVentaId = await this.ventaRepository.create(newVenta);
+
+        //Creo la factura asociada a la venta
+        const [error, facturaDto] = PostFacturaDto.create({
+            fecha: venta.fechaVenta.toISOString(),
+            precioFinal: venta.monto,
+            idCompra: null,
+            idVenta: newDbVentaId,
+        }); 
+
+        if (error) {
+            throw CustomError.notFound(error);
+        }
+
+        await this.facturaService.create(facturaDto!);
+
+        return newDbVentaId;
     }
 
     public async delete(idVenta: number): Promise<void> {

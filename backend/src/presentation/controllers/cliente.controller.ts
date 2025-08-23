@@ -62,12 +62,13 @@ export class ClienteController {
 
     update = async (req: Request, res: Response) => {
         const updatedCliente = req.body;
+        const idCliente = req.params.idCliente;
         if (!updatedCliente) {
             res.status(400).json({ message: 'Request body is empty' });
             return;
         }
 
-        const [error, updateClienteDto] = UpdateClienteDto.create(updatedCliente);
+        const [error, updateClienteDto] = UpdateClienteDto.create(updatedCliente, Number(idCliente));
         if (error) {
             res.status(400).json({ message: error });
             return;
@@ -75,8 +76,8 @@ export class ClienteController {
         
         if (updateClienteDto) {
             try {
-                const idCliente = await this.clienteService.update(updateClienteDto);
-                res.status(201).json({ idCliente });
+                const idClienteUpdate = await this.clienteService.update(updateClienteDto, Number(idCliente));
+                res.status(201).json({ idClienteUpdate });
             } catch (error) {
                 HandleError.throw(error, res);
             }

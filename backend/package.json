@@ -6,8 +6,8 @@
     "dev": "ts-node-dev --respawn --transpile-only src/main.ts",
     "build": "tsc",
     "start": "node dist/main.js",
-    "prisma:migrate": "npx prisma migrate dev",
-    "prisma:generate": "npx prisma generate"
+    "prisma-client": "npx prisma generate",
+    "prisma-pull": "npx prisma db pull"
   },
   "keywords": [],
   "author": "",

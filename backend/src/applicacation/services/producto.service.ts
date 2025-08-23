@@ -5,6 +5,7 @@ import { IProductoRepository } from "../../domain/repositories/producto.interfac
 import { Inject, Injectable } from "../../infraestructure/dependencies/injectable.dependency";
 import { REPOSITORIES_TOKENS } from "../../infraestructure/dependencies/repositories-tokens.dependency";
 import { PostProductoDto } from "../dtos/producto/postProducto.dto";
+import { UpdateProductoDto } from "../dtos/producto/updateProducto.dto";
 import { CustomError } from "../errors/custom.errors";
 
 @Injectable()
@@ -47,27 +48,24 @@ export class ProductoService {
             categoria.getIdCategoria(),
         );
 
-        await this.productoRepository.create(newProducto)
-        return newProducto.getIdProducto();
+        const newDbProductoId = await this.productoRepository.create(newProducto)
+        return newDbProductoId;
     }
 
-    public async update(producto: PostProductoDto): Promise<void> {
-        const productoExistente = await this.productoRepository.getProductoXCodigo(producto.codigo);
+    public async update(producto: UpdateProductoDto, idProducto: number): Promise<number> {
+        const productoExistente = await this.productoRepository.getProducto(idProducto);
         if (!productoExistente) throw CustomError.notFound('No se encontro el producto');
 
-        const marca = await this.marcaRepository.getMarca(producto.idMarca);
-        const categoria = await this.categoriaRepository.getCategoria(producto.idCategoria);
+        productoExistente.setCodigo(producto.codigo || productoExistente.getCodigo());
+        productoExistente.setNombre(producto.nombre || productoExistente.getNombre());
+        productoExistente.setDescripcion(producto.descripcion || productoExistente.getDescripcion());
+        productoExistente.setPrecio(producto.precio || productoExistente.getPrecio());
+        productoExistente.setStock(producto.stock || productoExistente.getStock());
+        productoExistente.setIdMarca(producto.idMarca || productoExistente.getIdMarca());
+        productoExistente.setIdCategoria(producto.idCategoria || productoExistente.getIdCategoria());
 
-        if (!marca) throw CustomError.notFound('No se encontro la marca');
-        if (!categoria) throw CustomError.notFound('No se encontro la categoria');
-
-        productoExistente.setCodigo(producto.codigo);
-        productoExistente.setNombre(producto.nombre);
-        productoExistente.setDescripcion(producto.descripcion);
-        productoExistente.setPrecio(producto.precio);
-        productoExistente.setStock(producto.stock);
-        productoExistente.setIdMarca(marca.getIdMarca());
-        productoExistente.setIdCategoria(categoria.getIdCategoria());
+        const updatedProductoId = await this.productoRepository.update(productoExistente);
+        return updatedProductoId;
     }
 
     public async delete(idProducto: number): Promise<void> {

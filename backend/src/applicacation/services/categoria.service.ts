@@ -31,15 +31,19 @@ export class CategoriaService {
             categoria.nombre,
         );
 
-        await this.categoriaRepository.create(newCategoria)
-        return newCategoria.getIdCategoria();
+        const newDbCategoriaId = await this.categoriaRepository.create(newCategoria)
+        return newDbCategoriaId;
     }
 
-    public async update(categoria: UpdateCategoriaDto): Promise<void> {
-        const categoriaExistente = await this.categoriaRepository.getCategoriaPorNombre(categoria.nombre);
+    public async update(categoria: UpdateCategoriaDto, idCategoria: number): Promise<number> {
+        
+        const categoriaExistente = await this.categoriaRepository.getCategoria(idCategoria);
+        
         if (!categoriaExistente) throw CustomError.notFound('No se encontro la categoria');
 
         categoriaExistente.setNombre(categoria.nombre);
+        const updatedCategoriaId = await this.categoriaRepository.update(categoriaExistente);
+        return updatedCategoriaId;
     }
 
     public async delete(idCategoria: number): Promise<void> {

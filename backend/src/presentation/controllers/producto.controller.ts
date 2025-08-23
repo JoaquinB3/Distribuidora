@@ -62,12 +62,13 @@ export class ProductoController {
 
     update = async (req: Request, res: Response) => {
         const updatedProducto = req.body;
+        const idProducto = req.params.idProducto;
         if (!updatedProducto) {
             res.status(400).json({ message: 'Request body is empty' });
             return;
         }
 
-        const [error, updateProductoDto] = UpdateProductoDto.create(updatedProducto);
+        const [error, updateProductoDto] = UpdateProductoDto.create(updatedProducto, Number(idProducto));
         if (error) {
             res.status(400).json({ message: error });
             return;
@@ -75,8 +76,8 @@ export class ProductoController {
         
         if (updateProductoDto) {
             try {
-                const idProducto = await this.productoService.update(updateProductoDto);
-                res.status(201).json({ idProducto });
+                const idProductoUpdate = await this.productoService.update(updateProductoDto, Number(idProducto));
+                res.status(201).json({ idProductoUpdate });
             } catch (error) {
                 HandleError.throw(error, res);
             }

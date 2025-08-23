@@ -1,17 +1,18 @@
-import { postProveedorValidation } from "../../validations/proveedor/postProveedor.validation";
+import { putProveedorValidation } from "../../validations/proveedor/postProveedor.validation";
 
 export class UpdateProveedorDto {
     private constructor(
-        public nombre: string,
-        public apellido: string,
-        public contacto: string,
-        public razon_social: string,
-        public telefono: string,
-        public mail: string,
+        public id?: number,
+        public nombre?: string,
+        public apellido?: string,
+        public contacto?: string,
+        public razon_social?: string,
+        public telefono?: string,
+        public mail?: string,
     ) {}
 
-    public static create(proveedor: any): [string?, UpdateProveedorDto?] {
-        const proveedorValidation = postProveedorValidation(proveedor);
+    public static create(proveedor: any, id: number): [string?, UpdateProveedorDto?] {
+        const proveedorValidation = putProveedorValidation(proveedor);
 
         if (!proveedorValidation.success) {
             return [JSON.stringify(proveedorValidation.error.message)];
@@ -22,6 +23,7 @@ export class UpdateProveedorDto {
         return [
             undefined,
             new UpdateProveedorDto(
+                id,
                 data.nombre,
                 data.apellido,
                 data.contacto,

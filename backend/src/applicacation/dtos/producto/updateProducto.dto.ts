@@ -1,20 +1,18 @@
-import { postProductoValidation } from "../../validations/producto/postProducto.validation";
-import { PostCategoriaDto } from "../categoria/postCategoria.dto";
-import { PostMarcaDto } from "../marca/postMarca.dto";
+import { putProductoValidation } from "../../validations/producto/postProducto.validation";
 
 export class UpdateProductoDto {
     private constructor (
-        public codigo: number,
-        public nombre: string,
-        public descripcion: string,
-        public precio: number,
-        public stock: number,
-        public idMarca: number,
-        public idCategoria: number,
+        public codigo?: number,
+        public nombre?: string,
+        public descripcion?: string,
+        public precio?: number,
+        public stock?: number,
+        public idMarca?: number,
+        public idCategoria?: number,
     ) {}
 
-    public static create(producto: any): [string?, UpdateProductoDto?] {
-        const productoValidation = postProductoValidation(producto);
+    public static create(producto: any, id: number): [string?, UpdateProductoDto?] {
+        const productoValidation = putProductoValidation(producto);
 
         if (!productoValidation.success) {
             return [JSON.parse(productoValidation.error.message)];

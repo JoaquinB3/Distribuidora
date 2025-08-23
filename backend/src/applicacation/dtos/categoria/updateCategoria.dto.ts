@@ -2,10 +2,11 @@ import { postCategoriaValidation } from "../../validations/categoria/postCategor
 
 export class UpdateCategoriaDto {
     private constructor(
+        public id: number,
         public nombre: string,
     ) {}
 
-    public static create(categoria: any): [string?, UpdateCategoriaDto?] {
+    public static create(categoria: any, id: number): [string?, UpdateCategoriaDto?] {
         const categoriaValidation = postCategoriaValidation(categoria);
 
         if (!categoriaValidation.success) {
@@ -17,6 +18,7 @@ export class UpdateCategoriaDto {
         return [
             undefined,
             new UpdateCategoriaDto(
+                id,
                 data.nombre,
             )
         ];

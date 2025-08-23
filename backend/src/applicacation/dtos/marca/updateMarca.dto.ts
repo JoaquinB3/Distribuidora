@@ -2,10 +2,11 @@ import { postMarcaValidation } from "../../validations/marca/postMarca.validatio
 
 export class UpdateMarcaDto {
     private constructor(
+        public id: number,
         public nombre: string,
     ) {}
 
-    public static create(marca: any): [string?, UpdateMarcaDto?] {
+    public static create(marca: any, id: number): [string?, UpdateMarcaDto?] {
         const marcaValidation = postMarcaValidation(marca);
 
         if (!marcaValidation.success) {
@@ -17,6 +18,7 @@ export class UpdateMarcaDto {
         return [
             undefined,
             new UpdateMarcaDto(
+                id,
                 data.nombre,
             )
         ];

@@ -30,8 +30,8 @@ export class MetodoPagoService {
             metodoPago.nombre,
         );
 
-        await this.metodoPagoRepository.create(newMetodoPago)
-        return newMetodoPago.getIdMetodoPago();
+        const newDbMetodoPagoId = await this.metodoPagoRepository.create(newMetodoPago)
+        return newDbMetodoPagoId;
     }
 
     public async delete(idMetodoPago: number): Promise<void> {

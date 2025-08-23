@@ -62,12 +62,13 @@ export class MarcaController {
 
     update = async (req: Request, res: Response) => {
         const updatedMarca = req.body;
+        const idMarca = req.params.idMarca;
         if (!updatedMarca) {
             res.status(400).json({ message: 'Request body is empty' });
             return;
         }
 
-        const [error, updateMarcaDto] = UpdateMarcaDto.create(updatedMarca);
+        const [error, updateMarcaDto] = UpdateMarcaDto.create(updatedMarca, Number(idMarca));
         if (error) {
             res.status(400).json({ message: error });
             return;
@@ -75,8 +76,8 @@ export class MarcaController {
         
         if (updateMarcaDto) {
             try {
-                const idMarca = await this.marcaService.update(updateMarcaDto);
-                res.status(201).json({ idMarca });
+                const idMarcaUpdate = await this.marcaService.update(updateMarcaDto, Number(idMarca));
+                res.status(201).json({ idMarcaUpdate });
             } catch (error) {
                 HandleError.throw(error, res);
             }

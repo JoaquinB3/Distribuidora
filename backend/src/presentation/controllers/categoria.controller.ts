@@ -62,12 +62,14 @@ export class CategoriaController {
 
     update = async (req: Request, res: Response) => {
         const updatedCategoria = req.body;
+        const idCategoria = req.params.idCategoria;
+        
         if (!updatedCategoria) {
             res.status(400).json({ message: 'Request body is empty' });
             return;
         }
 
-        const [error, updateCategoriaDto] = UpdateCategoriaDto.create(updatedCategoria);
+        const [error, updateCategoriaDto] = UpdateCategoriaDto.create(updatedCategoria, Number(idCategoria));
         if (error) {
             res.status(400).json({ message: error });
             return;
@@ -75,8 +77,8 @@ export class CategoriaController {
         
         if (updateCategoriaDto) {
             try {
-                const idCategoria = await this.categoriaService.update(updateCategoriaDto);
-                res.status(201).json({ idCategoria });
+                const idCategoriaUpdate = await this.categoriaService.update(updateCategoriaDto, Number(idCategoria));
+                res.status(201).json({ idCategoriaUpdate });
             } catch (error) {
                 HandleError.throw(error, res);
             }

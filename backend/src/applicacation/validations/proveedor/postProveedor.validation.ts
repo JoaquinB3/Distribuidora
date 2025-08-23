@@ -12,3 +12,8 @@ export const PostProveedorSchema = z.object({
 export const postProveedorValidation = (proveedor: any) => {
     return PostProveedorSchema.safeParse(proveedor);
 };
+
+export const PutProveedorSchema = PostProveedorSchema.partial();
+export const putProveedorValidation = (cliente: any) => {
+    return PutProveedorSchema.safeParse(cliente);
+};

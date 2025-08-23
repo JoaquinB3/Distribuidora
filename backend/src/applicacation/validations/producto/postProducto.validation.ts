@@ -13,3 +13,8 @@ export const PostProductoSchema = z.object({
 export const postProductoValidation = (venta: any) => {
     return PostProductoSchema.safeParse(venta);
 }
+
+export const PutProductoSchema = PostProductoSchema.partial();
+export const putProductoValidation = (producto: any) => {
+    return PutProductoSchema.safeParse(producto);
+};

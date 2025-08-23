@@ -36,20 +36,23 @@ export class ProveedorService {
             proveedor.mail,
         );
 
-        await this.proveedorRepository.create(newProveedor)
-        return newProveedor.getIdProveedor();
+        const newBdProveedorId = await this.proveedorRepository.create(newProveedor)
+        return newBdProveedorId;
     }
     
-    public async update(proveedor: UpdateProveedorDto): Promise<void> {
-        const proveedorExistente = await this.proveedorRepository.getProveedorPorMail(proveedor.mail);
+    public async update(proveedor: UpdateProveedorDto, idProveedor: number): Promise<number> {
+        const proveedorExistente = await this.proveedorRepository.getProveedor(idProveedor);
         if (!proveedorExistente) throw CustomError.notFound('No se encontro el proveedor');
 
-        proveedorExistente.setNombre(proveedor.nombre);
-        proveedorExistente.setApellido(proveedor.apellido);
-        proveedorExistente.setContacto(proveedor.contacto);
-        proveedorExistente.setRazonSocial(proveedor.razon_social);
-        proveedorExistente.setTelefono(proveedor.telefono);
-        proveedorExistente.setMail(proveedor.mail);
+        proveedorExistente.setNombre(proveedor.nombre || proveedorExistente.getNombre());
+        proveedorExistente.setApellido(proveedor.apellido || proveedorExistente.getApellido());
+        proveedorExistente.setContacto(proveedor.contacto || proveedorExistente.getContacto());
+        proveedorExistente.setRazonSocial(proveedor.razon_social || proveedorExistente.getRazonSocial());
+        proveedorExistente.setTelefono(proveedor.telefono || proveedorExistente.getTelefono());
+        proveedorExistente.setMail(proveedor.mail || proveedorExistente.getMail());
+
+        const updatedProveedorId = await this.proveedorRepository.update(proveedorExistente);
+        return updatedProveedorId;
     }
 
     public async delete(idProveedor: number): Promise<void> {

@@ -36,20 +36,23 @@ export class ClienteService {
             cliente.mail,
         );
 
-        await this.clienteRepository.create(newCliente)
-        return newCliente.getIdCliente();
+        const newBdClienteId = await this.clienteRepository.create(newCliente)
+        return newBdClienteId;
     }
     
-    public async update(cliente: UpdateClienteDto): Promise<void> {
-        const clienteExistente = await this.clienteRepository.getClientePorMail(cliente.mail);
+    public async update(cliente: UpdateClienteDto, idCliente: number): Promise<number> {
+        const clienteExistente = await this.clienteRepository.getCliente(idCliente);
         if (!clienteExistente) throw CustomError.notFound('No se encontro el cliente');
 
-        clienteExistente.setNombre(cliente.nombre);
-        clienteExistente.setApellido(cliente.apellido);
-        clienteExistente.setContacto(cliente.contacto);
-        clienteExistente.setRazonSocial(cliente.razon_social);
-        clienteExistente.setTelefono(cliente.telefono);
-        clienteExistente.setMail(cliente.mail);
+        clienteExistente.setNombre(cliente.nombre || clienteExistente.getNombre());
+        clienteExistente.setApellido(cliente.apellido || clienteExistente.getApellido());
+        clienteExistente.setContacto(cliente.contacto || clienteExistente.getContacto());
+        clienteExistente.setRazonSocial(cliente.razon_social || clienteExistente.getRazonSocial());
+        clienteExistente.setTelefono(cliente.telefono || clienteExistente.getTelefono());
+        clienteExistente.setMail(cliente.mail || clienteExistente.getMail());
+
+        const updatedClienteId = await this.clienteRepository.update(clienteExistente);
+        return updatedClienteId;
     }
 
     public async delete(idCliente: number): Promise<void> {
