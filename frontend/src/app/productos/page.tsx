@@ -13,12 +13,13 @@ import { ProductForm } from "@/components/products/ProductForm"
 import { useSearch } from "@/hooks/useSearch"
 import type { ProductoDto, Producto } from "@/entities/producto"
 import { ProductoService } from "@/services/producto.service"
+import { Product } from "@/types"
 
 export default function ProductosPage() {
   const [products, setProducts] = useState<Producto[]>([])
   const [loading, setLoading] = useState(true)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [editingProduct, setEditingProduct] = useState<Producto | null>(null)
+  const [editingProduct, setEditingProduct] = useState<Producto | Product | null>(null)
 
   const { searchTerm, setSearchTerm, filteredItems } = useSearch(products, ["nombre"])
 
